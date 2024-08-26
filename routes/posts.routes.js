@@ -2,18 +2,18 @@ const router = require("express").Router()
 const Post = require("./../models/Post.model")
 const isAuthenticated = require("./../middleware/verifyToken")
 
-router.get("/", (req, res, next) => {
+router.get('/', (req, res, next) => {
 
   Post
     .find()
     .select({ images: 1, date: 1 })
-    .populate("owner", "nick avatar")
+    .populate('owner', 'nick avatar')
     .then((posts) => res.json(posts))
     .catch(err => next(err))
 })
 
 
-router.get("/my-posts", isAuthenticated, (req, res, next) => {
+router.get('/my-posts', isAuthenticated, (req, res, next) => {
 
   const { _id: owner } = req.payload
 
@@ -23,7 +23,7 @@ router.get("/my-posts", isAuthenticated, (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.get("/my-posts/liked", isAuthenticated, (req, res, next) => {
+router.get('/my-posts/liked', isAuthenticated, (req, res, next) => {
 
   const { _id: owner } = req.payload
 
@@ -35,19 +35,19 @@ router.get("/my-posts/liked", isAuthenticated, (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.get("/:postId", isAuthenticated, (req, res, next) => {
+router.get('/:postId', isAuthenticated, (req, res, next) => {
 
   const { postId } = req.params
 
   Post
     .findById(postId)
-    .populate("owner", "nick avatar")
-    .populate("comments")
+    .populate('owner', 'nick avatar')
+    .populate('comments')
     .then((posts) => res.json(posts))
     .catch(err => next(err))
 })
 
-router.post("/", isAuthenticated, (req, res, next) => {
+router.post('/new', isAuthenticated, (req, res, next) => {
 
   const { images, description, date, comments, categories, likes } = req.body
   const { _id: owner } = req.payload
@@ -58,7 +58,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.put("/:postId", isAuthenticated, (req, res, next) => {
+router.put('/edit/:postId', isAuthenticated, (req, res, next) => {
 
   const { postId } = req.params
   const { images, description, date, comments, categories, likes } = req.body
@@ -69,7 +69,7 @@ router.put("/:postId", isAuthenticated, (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.delete("/:postId", isAuthenticated, (req, res, next) => {
+router.delete('/delete/:postId', isAuthenticated, (req, res, next) => {
 
   const { postId } = req.params
 
