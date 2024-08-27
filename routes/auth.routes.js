@@ -108,5 +108,4 @@ router.get('/verify', isAuthenticated, (req, res, next) => {
   res.json(req.payload)
 })
 
-
 module.exports = router

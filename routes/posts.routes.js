@@ -35,7 +35,7 @@ router.get('/my-posts/liked', isAuthenticated, (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.get('/:postId', isAuthenticated, (req, res, next) => {
+router.get('/post/:postId', isAuthenticated, (req, res, next) => {
 
   const { postId } = req.params
 
@@ -47,7 +47,7 @@ router.get('/:postId', isAuthenticated, (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.post('/new', isAuthenticated, (req, res, next) => {
+router.post('/', isAuthenticated, (req, res, next) => {
 
   const { images, description, date, comments, categories, likes } = req.body
   const { _id: owner } = req.payload
@@ -58,7 +58,7 @@ router.post('/new', isAuthenticated, (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.put('/edit/:postId', isAuthenticated, (req, res, next) => {
+router.put('/post/edit/:postId', isAuthenticated, (req, res, next) => {
 
   const { postId } = req.params
   const { images, description, date, comments, categories, likes } = req.body
