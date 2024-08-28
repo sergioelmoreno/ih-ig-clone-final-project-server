@@ -6,7 +6,7 @@ router.get('/', (req, res, next) => {
 
   Post
     .find()
-    .select({ images: 1, date: 1 })
+    .select({ images: 1, date: 1, likes: 1 })
     .populate('owner', 'nick avatar')
     .then((posts) => res.json(posts))
     .catch(err => next(err))
