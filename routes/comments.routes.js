@@ -3,15 +3,16 @@ const router = require("express").Router()
 const Comment = require('./../models/Comment.model')
 const isAuthenticated = require('./../middleware/verifyToken')
 
-router.get("/", isAuthenticated, (req, res, next) => {
+router.get("/:postId", isAuthenticated, (req, res, next) => {
 
+  const { postId: post } = req.params
   Comment
-    .find()
+    .find({ post })
     .then(comments => res.json(comments))
     .catch(err => next(err))
 })
 
-router.post("/new/:postId", isAuthenticated, (req, res, next) => {
+router.post("/:postId", isAuthenticated, (req, res, next) => {
 
   const { _id: owner } = req.payload
   const { postId: post } = req.params
