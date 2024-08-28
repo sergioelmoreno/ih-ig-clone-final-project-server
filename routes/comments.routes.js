@@ -8,6 +8,7 @@ router.get("/:postId", isAuthenticated, (req, res, next) => {
   const { postId: post } = req.params
   Comment
     .find({ post })
+    .populate('owner', 'nick avatar')
     .then(comments => res.json(comments))
     .catch(err => next(err))
 })
