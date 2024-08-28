@@ -35,7 +35,6 @@ const userSchema = new Schema(
     },
     phone: {
       type: String,
-      minlength: [9, 'The phone must have 9 numbers'],
       trim: true
     },
     avatar: {

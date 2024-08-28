@@ -8,9 +8,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 })
 
-
-
-
 const storage = new CloudinaryStorage({ cloudinary })
 
 module.exports = multer({ storage })
