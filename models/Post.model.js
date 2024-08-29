@@ -24,7 +24,7 @@ const postSchema = new Schema(
     }],
     categories: [{
       type: String,
-      enum: ['Nature', 'Lifestyle', 'Technology', 'Food'],
+      enum: ['Lifestyle', 'Shopping', 'Technology', 'Food', 'Music', 'Nature', 'Skyline'],
       required: [true, 'Choose one Category at least.']
     }],
     likes: [{
