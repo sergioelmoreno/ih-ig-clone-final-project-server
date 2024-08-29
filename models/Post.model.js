@@ -38,6 +38,9 @@ const postSchema = new Schema(
       coordinates: {
         type: [Number]
       }
+    },
+    address: {
+      type: String
     }
   },
   {
