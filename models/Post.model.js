@@ -30,7 +30,15 @@ const postSchema = new Schema(
     likes: [{
       type: Schema.Types.ObjectId,
       ref: 'User'
-    }]
+    }],
+    location: {
+      type: {
+        type: String
+      },
+      coordinates: {
+        type: [Number]
+      }
+    }
   },
   {
     timestamps: true

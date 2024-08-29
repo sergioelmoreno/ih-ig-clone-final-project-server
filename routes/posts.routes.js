@@ -49,11 +49,16 @@ router.get('/post/:postId', isAuthenticated, (req, res, next) => {
 
 router.post('/', isAuthenticated, (req, res, next) => {
 
-  const { images, description, date, comments, categories, likes } = req.body
+  const { images, description, date, comments, categories, likes, latitude, longitude } = req.body
   const { _id: owner } = req.payload
 
+  const location = {
+    type: 'Point',
+    coordinates: [longitude, latitude]
+  }
+
   Post
-    .create({ owner, images, description, date, comments, categories, likes })
+    .create({ owner, images, description, date, comments, categories, likes, location })
     .then((newPost) => res.json(newPost))
     .catch(err => next(err))
 })
@@ -61,10 +66,15 @@ router.post('/', isAuthenticated, (req, res, next) => {
 router.put('/post/edit/:postId', isAuthenticated, (req, res, next) => {
 
   const { postId } = req.params
-  const { images, description, date, comments, categories, likes } = req.body
+  const { images, description, date, comments, categories, likes, latitude, longitude } = req.body
+
+  const location = {
+    type: 'Point',
+    coordinates: [longitude, latitude]
+  }
 
   Post
-    .findByIdAndUpdate(postId, { images, description, date, comments, categories, likes }, { new: true })
+    .findByIdAndUpdate(postId, { images, description, date, comments, categories, likes, location }, { new: true })
     .then((post) => res.json(post))
     .catch(err => next(err))
 })
